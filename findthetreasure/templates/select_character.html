@@ -1,0 +1,15 @@
+{% extends 'game.html' %}
+
+{% block content %}
+    <h2>Select Character</h2>
+    <form method="post">
+        {% csrf_token %}
+        <select name="character">
+            {% for character in characters %}
+                <option value="{{ character.id }}">{{ character.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Select</button>
+    </form>
+{% endblock %}
+

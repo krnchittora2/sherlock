@@ -1,0 +1,13 @@
+{% extends 'game.html' %}
+
+{% block content %}
+    <h2>Hello {{ player.character.name }}</h2>
+    <div>
+        <h4>Get to know your role:</h4>
+        <p>{{ player.character.description }}</p>
+    </div>
+    <form action="{% url 'next_step' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Next</button>
+    </form>
+{% endblock %}

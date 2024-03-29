@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration and Login</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Create New Player</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="legalname">Legal Name</label>
+                        <input type="text" id="legalname" name="legalname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="character">Character</label>
+                        <select id="character" name="character" class="form-control" disabled>
+                            <option value="" disabled>Select Character</option>
+                            {% for character in characters %}
+                                <option value="{{ character.id }}">{{ character.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" name="player_register" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div class="col-md-6">
+                <h2>Select Player</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <select id="username" name="username" class="form-control" required>
+                            <option value="">Select username</option>
+                            {% for player in players %}
+                                <option value="{{ player.username }}">{{ player.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" name="player_login" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+        {% if error_message %}
+            <p class="text-danger">{{ error_message }}</p>
+        {% endif %}
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

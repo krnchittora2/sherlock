@@ -1,0 +1,22 @@
+<!-- game.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sherlock: Find The Treasure</title>
+</head>
+<body>
+    <nav>
+        {% if user.is_authenticated %}
+        <form action="{% url 'player_logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Logout {{ user.username }}</button>
+        </form>
+        {% endif %}
+    </nav>
+    
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
